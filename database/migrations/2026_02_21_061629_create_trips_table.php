@@ -14,17 +14,14 @@ return new class extends Migration
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('vehicle_id')
-                ->constrained()
-                ->cascadeOnDelete();
-
-            $table->foreignId('driver_id')
-                ->constrained()
-                ->cascadeOnDelete();
+            $table->foreignId('vehicle_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('driver_id')->constrained()->cascadeOnDelete();
 
             $table->integer('cargo_weight');
             $table->string('origin');
             $table->string('destination');
+
+            $table->decimal('estimated_fuel_cost', 10, 2)->nullable();
 
             $table->enum('status', [
                 'draft',
@@ -32,11 +29,6 @@ return new class extends Migration
                 'completed',
                 'cancelled',
             ])->default('draft');
-
-            $table->integer('start_odometer')->nullable();
-            $table->integer('end_odometer')->nullable();
-
-            $table->decimal('revenue', 10, 2)->nullable();
 
             $table->timestamps();
         });

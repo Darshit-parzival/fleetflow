@@ -12,10 +12,8 @@ class Trip extends Model
         'cargo_weight',
         'origin',
         'destination',
+        'estimated_fuel_cost',
         'status',
-        'start_odometer',
-        'end_odometer',
-        'revenue',
     ];
 
     // ==============================

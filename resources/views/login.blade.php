@@ -7,7 +7,7 @@
     <div class="card shadow-lg border-0 rounded-4 text-center p-4"
         style="width: 100%; max-width: 400px;">
 
-    
+
         <div class="d-flex justify-content-center mb-3">
             <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d"
                 class="rounded-circle shadow"
@@ -42,6 +42,11 @@
                     Login
                 </button>
             </div>
+            @if ($errors->any())
+            <div class="alert alert-danger rounded-3">
+                {{ $errors->first() }}
+            </div>
+            @endif
 
         </form>
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Role;
 
 class AuthController extends Controller
 {
@@ -15,14 +16,17 @@ class AuthController extends Controller
     }
     public function showRegister()
     {
-        return view('register');
+        $roles = Role::all();
+        return view('register', compact('roles'));
     }
     public function register(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|confirmed'
+            'password' => 'required|min:6|confirmed',
+            'roles' => 'required|array',
+            'roles.*' => 'exists:roles,id'
         ]);
 
         $user = User::create([
@@ -30,6 +34,8 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        $user->roles()->attach($request->roles);
 
         Auth::login($user);
 

@@ -10,3 +10,35 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+/* Hide default checkbox */
+.role-checkbox {
+    display: none;
+}
+
+/* Card style */
+.role-card {
+    display: block;
+    padding: 12px;
+    text-align: center;
+    border: 2px solid #dee2e6;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-weight: 500;
+    background-color: #fff;
+}
+
+/* Hover effect */
+.role-card:hover {
+    border-color: #000;
+    background-color: #f8f9fa;
+}
+
+/* Selected state */
+.role-checkbox:checked + .role-card {
+    border-color: #000;
+    background-color: #000;
+    color: #fff;
+    transform: scale(1.03);
+}

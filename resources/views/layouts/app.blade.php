@@ -72,7 +72,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link text-white">
+                    <a href="{{ route('expenses.index') }}"
+                        class="nav-link text-white {{ request()->routeIs('expenses.*') ? 'active' : '' }}">
                         <i class="bi bi-currency-rupee me-2"></i> Trip & Expense
                     </a>
                 </li>

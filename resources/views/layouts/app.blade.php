@@ -24,6 +24,12 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ route('drivers.index') }}" class="nav-link text-white">
+                        <i class="bi bi-person"></i> Drivers
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="#" class="nav-link text-white">
                         <i class="bi bi-truck me-2"></i> Vehicle Registry
                     </a>

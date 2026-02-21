@@ -85,12 +85,6 @@
 
                 <li class="nav-item">
                     <a href="#" class="nav-link text-white">
-                        <i class="bi bi-person me-2"></i> Drivers
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="#" class="nav-link text-white">
                         <i class="bi bi-truck me-2"></i> Vehicle Registry
                     </a>
                 </li>
@@ -103,7 +97,7 @@
 
                 <li class="nav-item">
                     <a href="#" class="nav-link text-white">
-                        <i class="bi bi-tools me-2"></i> Maintenance
+                        <i class="bi bi-wrench-adjustable me-2"></i> Maintenance
                     </a>
                 </li>
 
@@ -116,13 +110,13 @@
 
                 <li class="nav-item">
                     <a href="#" class="nav-link text-white">
-                        <i class="bi bi-person-check me-2"></i> Performance
+                        <i class="bi bi-graph-up-arrow me-2"></i> Performance
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="#" class="nav-link text-white">
-                        <i class="bi bi-graph-up me-2"></i> Analytics
+                        <i class="bi bi-bar-chart-line me-2"></i> Analytics
                     </a>
                 </li>
 

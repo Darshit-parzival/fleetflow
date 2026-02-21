@@ -59,12 +59,12 @@
 
             </div>
 
-            <div class=" ms-auto">
-                <button class="btn btn-danger" type="button">
-                    <i class="bi bi-logout mr-1"></i> Logout
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="btn btn-sm btn-outline-danger">
+                    Logout
                 </button>
-
-            </div>
+            </form>
 
         </div>
     </nav>
@@ -91,7 +91,7 @@
                 </li>
 
                 <li class="nav-item">
-                   <a href="{{ route('trips.index') }}"
+                    <a href="{{ route('trips.index') }}"
                         class="nav-link text-white {{ request()->routeIs('trips.*') ? 'active' : '' }}">
                         <i class="bi bi-map me-2"></i> Trip Dispatcher
                     </a>

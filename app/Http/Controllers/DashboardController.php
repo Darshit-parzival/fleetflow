@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Trip;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use App\Models\TripExpense;
+use App\Models\Maintenance;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {

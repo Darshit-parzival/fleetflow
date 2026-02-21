@@ -1,8 +1,6 @@
-@extends('layouts.app')
+@include('layouts.css')
 
-@section('content')
-
-<div class="container d-flex align-items-center justify-content-center" style="min-height: calc(100vh - 80px);">
+<div class="container d-flex align-items-center justify-content-center" style="min-height: calc(150vh - 80px);">
 
     <div class="card shadow-lg border-0 rounded-4 p-4"
         style="width: 100%; max-width: 420px;">
@@ -93,4 +91,4 @@
 
 </div>
 
-@endsection
+@include('layouts.js')

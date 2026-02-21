@@ -12,8 +12,7 @@ class DriverController extends Controller
      */
     public function index()
     {
-        $drivers = Driver::latest()->get();
-
+        $drivers = Driver::with('trips')->get();
         return view('drivers.index', compact('drivers'));
     }
 
@@ -61,17 +60,37 @@ class DriverController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $driver = Driver::findOrFail($id);
+        return view('drivers.edit', compact('driver'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $driver = Driver::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'license_number' => 'required|string|max:255',
+            'license_expiry' => 'required|date',
+            'complaints' => 'required|integer|min:0',
+            'safety_score' => 'required|numeric|min:0|max:100'
+        ]);
+
+        $driver->update([
+            'name' => $request->name,
+            'license_number' => $request->license_number,
+            'license_expiry' => $request->license_expiry,
+            'complaints' => $request->complaints,
+            'safety_score' => $request->safety_score,
+        ]);
+
+        return redirect()->route('drivers.index')
+            ->with('success', 'Driver updated successfully.');
     }
 
     /**

@@ -12,24 +12,22 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('trip_expenses', function (Blueprint $table) {
-            Schema::create('trip_expenses', function (Blueprint $table) {
-                $table->id();
+            $table->id();
 
-                $table->foreignId('trip_id')
-                    ->constrained()
-                    ->onDelete('cascade');
+            $table->foreignId('trip_id')
+                ->constrained()
+                ->onDelete('cascade');
 
-                $table->decimal('distance', 10, 2)->default(0);
-                $table->decimal('fuel_expense', 10, 2)->default(0);
-                $table->decimal('misc_expense', 10, 2)->default(0);
+            $table->decimal('distance', 10, 2)->default(0);
+            $table->decimal('fuel_expense', 10, 2)->default(0);
+            $table->decimal('misc_expense', 10, 2)->default(0);
 
-                $table->enum('status', [
-                    'pending',
-                    'approved'
-                ])->default('pending');
+            $table->enum('status', [
+                'pending',
+                'approved'
+            ])->default('pending');
 
-                $table->timestamps();
-            });
+            $table->timestamps();
         });
     }
 

@@ -114,7 +114,7 @@
     <button type="submit">Send code</button>
   </form>
 
-  <p class="footer"><a href="#">Back to sign in</a></p>
+  <p class="footer"><a href="{{route('login')}}">Back to log in</a></p>
 </div>
 </body>
 </html>

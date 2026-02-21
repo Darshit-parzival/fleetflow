@@ -35,7 +35,7 @@ class VehicleController extends Controller
             'status' => 'available',
         ]);
 
-        return redirect()->route('dashboard')
+        return redirect()->route('vehicles.index')
             ->with('success', 'Vehicle created successfully');
     }
 }

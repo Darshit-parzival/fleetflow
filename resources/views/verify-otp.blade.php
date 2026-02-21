@@ -120,8 +120,6 @@
     </div>
     <button type="submit">Verify</button>
   </form>
-
-  <p class="footer">Didn't get it? <a href="#">Resend code</a></p>
 </div>
 </body>
 </html>

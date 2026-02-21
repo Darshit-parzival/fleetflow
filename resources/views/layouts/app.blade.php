@@ -74,7 +74,6 @@
         <!-- Sidebar -->
         <div id="sidebar" class="sidebar bg-dark text-white p-3">
 
-
             <ul class="nav nav-pills flex-column gap-2">
 
                 <li class="nav-item">
@@ -147,6 +146,7 @@
     </script>
 
     @include('layouts.js')
+    @stack('scripts')
 </body>
 
 </html>

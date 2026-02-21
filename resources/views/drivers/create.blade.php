@@ -19,7 +19,14 @@
 
             <div class="mb-3">
                 <label class="form-label">License Type</label>
-                <input type="text" name="license_type" class="form-control">
+                <select name="license_type_id" class="form-select" required>
+                    <option value="">Select License Type</option>
+                    @foreach ($licenseTypes as $type)
+                        <option value="{{ $type->id }}">
+                            {{ $type->name }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="mb-3">
@@ -29,10 +36,13 @@
 
             <div class="mb-3">
                 <label class="form-label">Status</label>
-                <select name="status" class="form-select">
-                    <option value="on_duty">On Duty</option>
-                    <option value="off_duty">Off Duty</option>
-                    <option value="suspended">Suspended</option>
+                <select name="driver_status_id" class="form-select" required>
+                    <option value="">Select Status</option>
+                    @foreach ($statuses as $status)
+                        <option value="{{ $status->id }}">
+                            {{ ucfirst($status->name) }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
 

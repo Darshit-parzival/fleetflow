@@ -1,0 +1,121 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Geist', sans-serif;
+    background: #fafafa;
+    color: #111;
+}
+
+
+
+/* Hide default checkbox */
+.role-checkbox {
+    display: none;
+}
+
+/* Card style */
+.role-card {
+    display: block;
+    padding: 12px;
+    text-align: center;
+    border: 2px solid #dee2e6;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-weight: 500;
+    background-color: #fff;
+}
+
+/* Hover effect */
+.role-card:hover {
+    border-color: #000;
+    background-color: #f8f9fa;
+}
+
+/* Selected state */
+.role-checkbox:checked+.role-card {
+    border-color: #000;
+    background-color: #000;
+    color: #fff;
+    transform: scale(1.03);
+}
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+}
+
+.nav-link.active {
+    background-color: #0d6efd !important;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.flash-wrapper {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.flash-box {
+    padding: 15px 20px;
+    border-radius: 12px;
+    min-width: 280px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+    animation: fadeOut 5s forwards;
+}
+
+.flash-box.success {
+    background: #198754;
+}
+
+.flash-box.error {
+    background: #dc3545;
+}
+
+.flash-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.7);
+    animation: progress 5s linear forwards;
+}
+
+@keyframes progress {
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0%;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    85% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}

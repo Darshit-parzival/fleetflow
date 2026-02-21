@@ -6,18 +6,30 @@
     @include('layouts.css')
 </head>
 
+
 <body class="bg-light">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">FleetFlow</a>
-        </div>
+    <nav>
+        <a href="{{ url('/') }}" class="brand">FleetFlow</a>
     </nav>
+    @if(session('success') || session('error'))
+    <div class="flash-wrapper">
+
+        <div class="flash-box {{ session('success') ? 'success' : 'error' }}">
+            <div class="flash-content">
+                {{ session('success') ?? session('error') }}
+            </div>
+            <div class="flash-progress"></div>
+        </div>
+
+    </div>
+    @endif
 
     <div class="container mt-5">
         @yield('content')
     </div>
     @include('layouts.js')
+    </script>
 </body>
 
 </html>

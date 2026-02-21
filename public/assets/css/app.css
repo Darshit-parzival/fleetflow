@@ -1,3 +1,28 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Geist', sans-serif;
+            background: #fafafa;
+            color: #111;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            height: 56px;
+            border-bottom: 1px solid #f0f0f0;
+            background: #fff;
+        }
+
+        .brand {
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: -0.3px;
+            color: #111;
+            text-decoration: none;
+        }
+
 /* Hide default checkbox */
 .role-checkbox {
     display: none;
@@ -28,4 +53,51 @@
     background-color: #000;
     color: #fff;
     transform: scale(1.03);
+}
+
+.flash-wrapper {
+    position: fixed;
+    top: 90px;
+    left: 20px;
+    z-index: 9999;
+}
+
+.flash-box {
+    padding: 15px 20px;
+    border-radius: 12px;
+    min-width: 280px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+
+    animation: fadeOut 5s forwards;
+}
+
+.flash-box.success {
+    background: #198754;
+}
+
+.flash-box.error {
+    background: #dc3545;
+}
+
+.flash-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background: rgba(255,255,255,0.7);
+    animation: progress 5s linear forwards;
+}
+
+@keyframes progress {
+    from { width: 100%; }
+    to { width: 0%; }
+}
+
+@keyframes fadeOut {
+    0%   { opacity: 1; }
+    85%  { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
 }

@@ -21,6 +21,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
+Route::get('/forgot-password', [AuthController::class, 'showForgot'])->name('password.request');
+Route::post('/send-otp', [AuthController::class, 'sendOtp'])->name('password.sendOtp');
+
+Route::get('/verify-otp', [AuthController::class, 'showVerifyOtp'])->name('password.verify');
+Route::post('/verify-otp', [AuthController::class, 'verifyOtp'])->name('password.verify.post');
+
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.reset');
+
 Route::get('/', function () {
     return redirect()->route('login');
 });

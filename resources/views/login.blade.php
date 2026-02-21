@@ -42,11 +42,11 @@
                     Login
                 </button>
             </div>
-            @if ($errors->any())
-            <div class="alert alert-danger rounded-3">
-                {{ $errors->first() }}
+            <div class="text-center mt-3">
+                <a href="{{ route('password.request') }}" class="text-decoration-none small">
+                    Forgot Password?
+                </a>
             </div>
-            @endif
 
         </form>
 

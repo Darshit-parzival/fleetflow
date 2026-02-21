@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Driver;
 use Illuminate\Http\Request;
-use App\Models\Vehicle;
 
 class DriverController extends Controller
 {
@@ -32,24 +31,23 @@ class DriverController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'license_plate' => 'required|unique:vehicles',
-            'name' => 'required',
-            'type' => 'required',
-            'max_capacity' => 'required|integer',
-            'odometer' => 'required|integer|min:0',
+            'name' => 'required|string',
+            'license_number' => 'required|unique:drivers',
+            'license_type' => 'nullable|string',
+            'license_expiry' => 'nullable|date',
+            'status' => 'required|in:on_duty,off_duty,suspended',
         ]);
 
-        Vehicle::create([
-            'license_plate' => $request->license_plate,
+        Driver::create([
             'name' => $request->name,
-            'type' => $request->type,
-            'max_capacity' => $request->max_capacity,
-            'odometer' => $request->odometer,
-            'status' => 'available', // default state
+            'license_number' => $request->license_number,
+            'license_type' => $request->license_type,
+            'license_expiry' => $request->license_expiry,
+            'status' => $request->status,
         ]);
 
-        return redirect()->route('vehicles.index')
-            ->with('success', 'Vehicle registered successfully');
+        return redirect()->route('drivers.index')
+            ->with('success', 'Driver created successfully');
     }
 
     /**

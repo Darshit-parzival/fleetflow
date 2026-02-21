@@ -11,12 +11,20 @@ class TripController extends Controller
 {
     public function index()
     {
-        $trips = Trip::with(['vehicle', 'driver'])
-            ->latest()
+        $trips = Trip::with(['vehicle', 'driver'])->latest()->get();
+
+        $vehicles = Vehicle::where('status', 'available')->get();
+
+        $drivers = Driver::where('status', 'on_duty')
+            ->where(function ($q) {
+                $q->whereNull('license_expiry')
+                    ->orWhereDate('license_expiry', '>=', now());
+            })
             ->get();
 
-        return view('trips.index', compact('trips'));
+        return view('trips.index', compact('trips', 'vehicles', 'drivers'));
     }
+
     public function create()
     {
         $vehicles = Vehicle::where('status', 'available')->get();
@@ -29,6 +37,7 @@ class TripController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'vehicle_id' => 'required',
             'driver_id' => 'required',
@@ -56,7 +65,7 @@ class TripController extends Controller
 
         // Update states
         $vehicle->update(['status' => 'on_trip']);
-        $trip->driver->update(['status' => 'on_duty']);
+        $trip->driver->update(['status' => 'on_trip']);
 
         return redirect()->route('dashboard')
             ->with('success', 'Trip dispatched successfully');

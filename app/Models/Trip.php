@@ -41,6 +41,11 @@ class Trip extends Model
         return $this->belongsTo(Driver::class);
     }
 
+
+    public function expenses()
+    {
+        return $this->hasMany(TripExpense::class);
+    }
     // ==============================
     // HELPER METHODS
     // ==============================

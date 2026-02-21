@@ -10,8 +10,10 @@
 
 <body class="bg-light">
 
-    <nav>
-        <a href="{{ url('/') }}" class="brand">FleetFlow</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">FleetFlow</a>
+        </div>
     </nav>
     @if(session('success') || session('error'))
     <div class="flash-wrapper">
@@ -25,7 +27,6 @@
 
     </div>
     @endif
-<body>
 
     <div class="d-flex">
 
@@ -36,31 +37,36 @@
             <ul class="nav nav-pills flex-column gap-2">
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link text-white active">
+                    <a href="{{ route('dashboard') }}"
+                        class="nav-link text-white {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                         <i class="bi bi-speedometer2 me-2"></i> Dashboard
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('drivers.index') }}" class="nav-link text-white">
+                    <a href="{{ route('drivers.index') }}"
+                        class="nav-link text-white {{ request()->routeIs('drivers.*') ? 'active' : '' }}">
                         <i class="bi bi-person"></i> Drivers
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link text-white">
+                    <a href="{{ route('vehicles.index') }}"
+                        class="nav-link text-white {{ request()->routeIs('vehicles.*') ? 'active' : '' }}">
                         <i class="bi bi-truck me-2"></i> Vehicle Registry
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link text-white">
+                    <a href="{{ route('trips.index') }}"
+                        class="nav-link text-white {{ request()->routeIs('trips.*') ? 'active' : '' }}">
                         <i class="bi bi-map me-2"></i> Trip Dispatcher
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link text-white">
+                    <a href="{{ route('maintenance.index') }}"
+                        class="nav-link text-white {{ request()->routeIs('maintanance.*') ? 'active' : '' }}">
                         <i class="bi bi-tools me-2"></i> Maintenance
                     </a>
                 </li>

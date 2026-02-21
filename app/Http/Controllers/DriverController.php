@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Driver;
 use Illuminate\Http\Request;
+use App\Models\Vehicle;
 
 class DriverController extends Controller
 {

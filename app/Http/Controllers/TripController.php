@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class TripController extends Controller
 {
+    public function index()
+    {
+        $trips = Trip::with(['vehicle', 'driver'])
+            ->latest()
+            ->get();
+
+        return view('trips.index', compact('trips'));
+    }
     public function create()
     {
         $vehicles = Vehicle::where('status', 'available')->get();

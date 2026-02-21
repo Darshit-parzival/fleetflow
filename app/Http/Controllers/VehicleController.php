@@ -7,11 +7,16 @@ use Illuminate\Http\Request;
 
 class VehicleController extends Controller
 {
+    public function index()
+    {
+        $vehicles = Vehicle::latest()->get();
+        return view('vehicle.index', compact('vehicles'));
+    }
+
     public function create()
     {
         return view('vehicle.create');
     }
-
     public function store(Request $request)
     {
         $request->validate([

@@ -18,4 +18,14 @@ class Driver extends Model
     {
         return $this->hasMany(Trip::class);
     }
+
+    public function licenseType()
+    {
+        return $this->belongsTo(LicenseType::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(DriverStatus::class, 'driver_status_id');
+    }
 }

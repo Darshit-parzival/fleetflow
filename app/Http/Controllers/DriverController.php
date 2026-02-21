@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Driver;
+use App\Models\DriverStatus;
+use App\Models\LicenseType;
 use Illuminate\Http\Request;
 
 class DriverController extends Controller
@@ -22,7 +24,10 @@ class DriverController extends Controller
      */
     public function create()
     {
-        return view('drivers.create');
+        $licenseTypes = LicenseType::all();
+        $statuses = DriverStatus::all();
+
+        return view('drivers.create', compact('licenseTypes', 'statuses'));
     }
 
     /**
@@ -30,23 +35,18 @@ class DriverController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string',
-            'license_number' => 'required|unique:drivers',
-            'license_type' => 'nullable|string',
-            'license_expiry' => 'nullable|date',
-            'status' => 'required|in:on_duty,off_duty,suspended',
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'license_number' => ['required', 'string', 'max:100', 'unique:drivers,license_number'],
+            'license_type_id' => ['required', 'exists:license_types,id'],
+            'license_expiry' => ['required', 'date', 'after:today'],
+            'driver_status_id' => ['required', 'exists:driver_statuses,id'],
         ]);
 
-        Driver::create([
-            'name' => $request->name,
-            'license_number' => $request->license_number,
-            'license_type' => $request->license_type,
-            'license_expiry' => $request->license_expiry,
-            'status' => $request->status,
-        ]);
+        Driver::create($validated);
 
-        return redirect()->route('drivers.index')
+        return redirect()
+            ->route('drivers.index')
             ->with('success', 'Driver created successfully');
     }
 

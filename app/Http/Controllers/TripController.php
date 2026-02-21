@@ -37,37 +37,49 @@ class TripController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
-        $request->validate([
-            'vehicle_id' => 'required',
-            'driver_id' => 'required',
-            'cargo_weight' => 'required|integer',
-            'origin' => 'required',
-            'destination' => 'required',
+        $validated = $request->validate([
+            'vehicle_id' => ['required', 'exists:vehicles,id'],
+            'driver_id' => ['required', 'exists:drivers,id'],
+            'cargo_weight' => ['required', 'integer', 'min:1'],
+            'estimated_fuel_cost' => ['nullable', 'numeric', 'min:0'],
+            'origin' => ['required', 'string', 'max:255'],
+            'destination' => ['required', 'string', 'max:255'],
         ]);
 
-        $vehicle = Vehicle::findOrFail($request->vehicle_id);
+        $vehicle = Vehicle::where('id', $validated['vehicle_id'])
+            ->where('status', 'available')
+            ->firstOrFail();
 
-        if ($request->cargo_weight > $vehicle->max_capacity) {
-            return back()->withErrors([
-                'cargo_weight' => 'Cargo exceeds vehicle capacity.',
-            ]);
+        $driver = Driver::where('id', $validated['driver_id'])
+            ->where('status', 'on_duty')
+            ->firstOrFail();
+
+        if ($validated['cargo_weight'] > (int) $vehicle->max_capacity) {
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'cargo_weight' => "Cargo exceeds vehicle capacity of {$vehicle->max_capacity} kg.",
+                ]);
         }
 
-        $trip = Trip::create([
-            'vehicle_id' => $request->vehicle_id,
-            'driver_id' => $request->driver_id,
-            'cargo_weight' => $request->cargo_weight,
-            'origin' => $request->origin,
-            'destination' => $request->destination,
-            'status' => Trip::STATUS_DISPATCHED,
-        ]);
+        DB::transaction(function () use ($validated, $vehicle, $driver) {
 
-        // Update states
-        $vehicle->update(['status' => 'on_trip']);
-        $trip->driver->update(['status' => 'on_trip']);
+            Trip::create([
+                'vehicle_id' => $vehicle->id,
+                'driver_id' => $driver->id,
+                'cargo_weight' => $validated['cargo_weight'],
+                'estimated_fuel_cost' => $validated['estimated_fuel_cost'] ?? 0,
+                'origin' => $validated['origin'],
+                'destination' => $validated['destination'],
+                'status' => Trip::STATUS_DISPATCHED,
+            ]);
 
-        return redirect()->route('dashboard')
-            ->with('success', 'Trip dispatched successfully');
+            $vehicle->update(['status' => 'on_trip']);
+            $driver->update(['status' => 'on_trip']);
+        });
+
+        return redirect()
+            ->route('trips.index')
+            ->with('success', 'Trip dispatched successfully.');
     }
 }

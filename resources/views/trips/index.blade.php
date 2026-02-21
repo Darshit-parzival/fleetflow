@@ -61,10 +61,12 @@
 
                         <div class="col-md-6">
                             <label class="form-label">Select Vehicle</label>
-                            <select name="vehicle_id" class="form-select" required>
+                            <select name="vehicle_id" class="form-select select2" id="vehicleSelect" required>
+
                                 <option value="">Select Vehicle</option>
+
                                 @foreach ($vehicles as $vehicle)
-                                    <option value="{{ $vehicle->id }}">
+                                    <option value="{{ $vehicle->id }}" data-capacity="{{ $vehicle->max_capacity }}">
                                         {{ $vehicle->name }} ({{ $vehicle->license_plate }})
                                     </option>
                                 @endforeach
@@ -85,7 +87,16 @@
 
                         <div class="col-md-6">
                             <label class="form-label">Cargo Weight (kg)</label>
-                            <input type="number" name="cargo_weight" class="form-control" required>
+                            <input type="number" name="cargo_weight" id="cargoInput" class="form-control" min="1"
+                                required>
+
+                            <small class="text-muted">
+                                Max capacity: <span id="maxCapacityText">-</span> kg
+                            </small>
+
+                            @error('cargo_weight')
+                                <div class="text-danger small mt-1">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="col-md-6">
@@ -114,3 +125,6 @@
 
     </div>
 @endsection
+@push('scripts')
+    <script src="{{ asset('assets/js/trips.js') }}"></script>
+@endpush

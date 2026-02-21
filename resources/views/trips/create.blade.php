@@ -9,10 +9,10 @@
 
             <div class="mb-3">
                 <label class="form-label">Vehicle</label>
-                <select name="vehicle_id" class="form-select" required>
+                <select name="vehicle_id" class="form-select select2" id="vehicleSelect" required>
                     <option value="">Select Vehicle</option>
                     @foreach ($vehicles as $vehicle)
-                        <option value="{{ $vehicle->id }}">
+                        <option value="{{ $vehicle->id }}" data-capacity="{{ $vehicle->max_capacity }}">
                             {{ $vehicle->name }} ({{ $vehicle->license_plate }})
                         </option>
                     @endforeach
@@ -21,7 +21,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Driver</label>
-                <select name="driver_id" class="form-select" required>
+                <select name="driver_id" class="form-select select2" required>
                     <option value="">Select Driver</option>
                     @foreach ($drivers as $driver)
                         <option value="{{ $driver->id }}">
@@ -33,7 +33,11 @@
 
             <div class="mb-3">
                 <label class="form-label">Cargo Weight (kg)</label>
-                <input type="number" name="cargo_weight" class="form-control" required>
+                <input type="number" name="cargo_weight" id="cargoInput" class="form-control" min="1" required>
+
+                <small class="text-muted">
+                    Max capacity: <span id="maxCapacityText">-</span> kg
+                </small>
             </div>
 
             <div class="mb-3">
@@ -57,3 +61,6 @@
         </form>
     </div>
 @endsection
+@push('scripts')
+    <script src="{{ asset('assets/js/trips.js') }}"></script>
+@endpush

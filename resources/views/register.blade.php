@@ -22,35 +22,33 @@
         </div>
 
         <!-- Form -->
-        <form method="POST" action="#">
+        <form method="POST" action="{{ route('register.submit') }}">
             @csrf
 
             <div class="mb-3">
                 <label class="form-label fw-semibold">Full Name</label>
-                <input type="text"
+                <input type="text" name="name"
                        class="form-control rounded-3"
                        placeholder="Enter your full name">
             </div>
 
             <div class="mb-3">
                 <label class="form-label fw-semibold">Email</label>
-                <input type="email"
+                <input type="email" name="email"
                        class="form-control rounded-3"
                        placeholder="Enter your email">
             </div>
 
             <div class="mb-3">
                 <label class="form-label fw-semibold">Password</label>
-                <input type="password"
+                <input type="password" name="password"
                        class="form-control rounded-3"
                        placeholder="Create password">
             </div>
 
             <div class="mb-3">
                 <label class="form-label fw-semibold">Confirm Password</label>
-                <input type="password"
-                       class="form-control rounded-3"
-                       placeholder="Confirm password">
+                <input type="password" name="password_confirmation" class="form-control rounded-3" placeholder="Confirm password">
             </div>
 
             <div class="d-grid">

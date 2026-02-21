@@ -19,19 +19,19 @@
         <p class="text-muted small mb-4">Fleet Management System</p>
 
 
-        <form method="POST" action="#">
+        <form method="POST" action="{{ route('login.submit') }}">
             @csrf
 
             <div class="mb-3 text-start">
                 <label class="form-label fw-semibold">Email</label>
-                <input type="email"
+                <input type="email" name="email"
                     class="form-control rounded-3"
                     placeholder="Enter your email">
             </div>
 
             <div class="mb-3 text-start">
                 <label class="form-label fw-semibold">Password</label>
-                <input type="password"
+                <input type="password" name="password"
                     class="form-control rounded-3"
                     placeholder="Enter your password">
             </div>
